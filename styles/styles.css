@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    background:#1983FF;
+    margin:0 0 15px 0;
+    padding:15px 0;
+   
+}
+.header > a {
+    text-decoration: none;
+    color:white;
+}
+.create__wrapper,.tasks__wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.create__task{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.create__button {
+    background:#1AAA55;
+    color:white;
+    outline: none;
+    border:none;
+    cursor: pointer;
+    width: 150px;
+    padding:10px 0;
+    font-size: 15px;
+}
+.create__button:hover {
+    opacity:0.8;
+}
+.create__textarea {
+   flex-basis: 50%;
+}
+.tasks__wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.task {
+    display: flex;
+    justify-content: space-between;
+    padding:10px 0;
+    margin:10px 0;
+    border-bottom: 1px solid black;
+}
