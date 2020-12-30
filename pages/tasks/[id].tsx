@@ -1,11 +1,14 @@
-import { BaseUrl } from "../../store/store";
-export default function Post({ data }) {
+import dbConnect from "../../utils/dbConnect";
+import TaskModel from "../../models/TaskModel";
+export default function Post({ task }) {
+  const taskById = JSON.parse(task);
+
   return (
     <div>
       <ul>
-        {Object.keys(data).map((key) => (
-          <li key={data[key]}>
-            {key} : {data[key]}
+        {Object.keys(taskById).map((key) => (
+          <li key={taskById[key]}>
+            {key} : {taskById[key]}
           </li>
         ))}
       </ul>
@@ -13,9 +16,10 @@ export default function Post({ data }) {
   );
 }
 
-Post.getInitialProps = async (ctx) => {
-  const response = await fetch(`${BaseUrl}/tasks/${ctx.query.id}`);
-  const data = await response.json();
+export async function getServerSideProps({ params }) {
+  await dbConnect();
 
-  return { data: data[0] };
-};
+  const result = await TaskModel.findById(params.id);
+
+  return { props: { task: JSON.stringify(result) } };
+}

@@ -56,14 +56,27 @@ export const actions = {
     }
   }),
   deleteTask: a(async (id: string) => {
-    // try {
-    //   const response = await fetch(`${BaseUrl}/tasks/${id}`, {
-    //     method: "DELETE",
-    //   });
-    //   const data = await response.json();
-    //   state.tasks = data;
-    // } catch (e) {
-    //   state.error = e;
-    // }
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "DELETE",
+      });
+    } catch (e) {
+      state.error = e;
+    }
   }),
+  getTask:a(async (id:string)=>{
+    try {
+      const response = await fetch(`/api/tasks/${id}`,{
+        method:"GET",
+        headers:{
+          Accept:contentType,
+          "Content-Type":contentType
+  
+        },
+      })
+    }
+    catch (e) {
+      state.error = e;
+    }
+  })
 };
