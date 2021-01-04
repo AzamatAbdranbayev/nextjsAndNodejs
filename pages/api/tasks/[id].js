@@ -10,6 +10,17 @@ export default async function handler(req, res) {
   await dbConnect();
 
   switch (method) {
+    case "PUT":
+      try {
+        const task = await Task.updateOne(
+          { _id: id },
+          { $set: { value: req.body.value } }
+        );
+        if (!task) res.status(400).json({ success: false });
+      } catch (e) {
+        res.status(400).json({ success: false });
+      }
+      break;
     case "DELETE":
       try {
         const tasksDeleted = await Task.deleteOne({ _id: id });

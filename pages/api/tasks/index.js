@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         const tasks = await Task.find();
         res.status(200).json({ success: true, data: tasks });
       } catch (e) {
-        res.status(400).json({success:false})
+        res.status(400).json({ success: false });
       }
       break;
     case "POST":
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         await task.save();
         res.status(200).json({ success: true, data: task });
       } catch (e) {
-        res.status(400).json({success:false})
+        res.status(400).json({ success: false });
       }
       break;
     default:

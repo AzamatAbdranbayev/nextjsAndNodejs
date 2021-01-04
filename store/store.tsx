@@ -1,12 +1,12 @@
 import { observable as o, action as a } from "mobx";
-const contentType = "application/json"
+const contentType = "application/json";
 
-export interface Task {
+export interface TaskInterface {
   _id: string;
   value: string;
 }
 export interface Tasklist {
-  tasks: Task[];
+  tasks: TaskInterface[];
   error: string | null;
   valueNewTask: string;
   valueChangedTask: string;
@@ -25,32 +25,14 @@ export const actions = {
   }),
   postTask: a(async () => {
     try {
-      const response = await fetch("/api/tasks",{
-        method:"POST",
-        headers:{
-          Accept:contentType,
-          "Content-Type":contentType
-  
+      const response = await fetch("/api/tasks", {
+        method: "POST",
+        headers: {
+          Accept: contentType,
+          "Content-Type": contentType,
         },
-        body: JSON.stringify({value:state.valueNewTask})
-      })
-    }
-    catch (e) {
-      state.error = e;
-    }
-  }),
-  getTasks: a(async () => {
-    console.log("gettask store")
-    try {
-     const response = await fetch("/api/tasks",{
-       method:"GET",
-       headers:{
-        Accept:contentType,
-        "Content-Type":contentType
-
-      },
-     })
-     console.log("response in store",response)
+        body: JSON.stringify({ value: state.valueNewTask }),
+      });
     } catch (e) {
       state.error = e;
     }
@@ -64,19 +46,16 @@ export const actions = {
       state.error = e;
     }
   }),
-  getTask:a(async (id:string)=>{
+  updateTask: a(async (id: string) => {
     try {
-      const response = await fetch(`/api/tasks/${id}`,{
-        method:"GET",
-        headers:{
-          Accept:contentType,
-          "Content-Type":contentType
-  
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          Accept: contentType,
+          "Content-Type": contentType,
         },
-      })
-    }
-    catch (e) {
-      state.error = e;
-    }
-  })
+        body: JSON.stringify({ value: state.valueChangedTask }),
+      });
+    } catch (e) {}
+  }),
 };

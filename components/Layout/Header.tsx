@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-export default function Header({ children }) {
+interface Props {
+  children: React.ReactNode;
+}
+export default function Header({ children }: Props) {
   return (
     <>
       <header className="header">

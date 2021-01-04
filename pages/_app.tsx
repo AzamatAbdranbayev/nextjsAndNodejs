@@ -3,8 +3,9 @@ import { state, actions } from "../store/store";
 import Header from "../components/Layout/Header";
 import "../styles/styles.css";
 import "../styles/globals.css";
+import type { AppProps } from "next/app";
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }:AppProps) {
   return (
     <Provider state={state} actions={actions}>
       <Header>
